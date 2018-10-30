@@ -221,8 +221,11 @@ public class BluetoothSPP {
     };
     
     public void stopAutoConnect() {
-        isAutoConnectionEnabled = false;
-    }
+ if (isAutoConnectionEnabled) {
+            isAutoConnectionEnabled = false;
+            // Restore the previous callback
+            mBluetoothConnectionListener = mBluetoothConnectionListenerSecondary;
+        }    }
     
     public void connect(Intent data) {
         String address = data.getExtras().getString(BluetoothState.EXTRA_DEVICE_ADDRESS);
